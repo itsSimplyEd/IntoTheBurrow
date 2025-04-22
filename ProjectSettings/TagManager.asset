@@ -11,6 +11,8 @@ TagManager:
   - Terrain
   - Hitbox
   - FinalExit
+  - Burrow
+  - Badger
   layers:
   - Default
   - TransparentFX
@@ -18,9 +20,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Burrowed
+  - Badger
+  - Enemies
   - 
   - 
   - 

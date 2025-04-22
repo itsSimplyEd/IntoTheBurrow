@@ -4,7 +4,10 @@
 // Creation Date : March 14, 2025
 //
 // Brief Description : Lets the player exit the level if they collide with the exit. Loads next scene with
-                       reload delay.
+                       reload delay. Additionally, activates the exit when EnemyCount is 0 and isExitActive is false.
+                       This code also checks if an exit is marked as final exit and will either load the next scene
+                       or return the player to the MainMenu. This will activate the meshRenderer and Collider for 
+                       the exit.
 *****************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
@@ -18,21 +21,28 @@ public class ExitManager : MonoBehaviour
     private bool isExitActive = false;
     [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private float reloadDelay = 1.5f;
-    [SerializeField] private MeshRenderer mr;
-    [SerializeField] private Collider exitcollider;
+    [SerializeField] private MeshRenderer mR;
+    [SerializeField] private Collider exitCollider;
     [SerializeField] private bool isFinal;
 
     /// <summary>
-    /// 
+    /// checks if the enemy count in the array is equal to 0 and if isExitActive is false, if so, gets ActivateExit() 
+    /// and sets isExitAcrice to true
     /// </summary>
     private void Update()
     {
         if (enemyManager.GetEnemyCount() == 0 && !isExitActive)
         {
            ActivateExit();
-            isExitActive = true;
+           isExitActive = true;
         }
     }
+
+    /// <summary>
+    /// When a player passes through this trigger, if the isFinal bool is false, they will load the next active scene.
+    /// If the isFinal bool is true, they will get the FinalExit function (Load MainMenu) and disable player movement.
+    /// </summary>
+    /// <param name="exitEncountered"></param>
     private void OnTriggerEnter(Collider exitEncountered)
     {
         if (exitEncountered.gameObject.tag == "Rue")
@@ -45,16 +55,25 @@ public class ExitManager : MonoBehaviour
             }
             else
             {
+                //loads the MainMenu
                 FindObjectOfType<GameManager>().FinalExit();
+                FindObjectOfType<PlayerController>().enabled = false;
             }
         }
     }
 
+    /// <summary>
+    /// Activates the meshRenderer and the Collider for the exit 
+    /// </summary>
     void ActivateExit()
     {
-        mr.enabled = true;
+        mR.enabled = true;
         GetComponent<Collider>().enabled = true;
     }
+
+    /// <summary>
+    /// If hasExited bool is true, will load the next scene
+    /// </summary>
     private void Exited()
     {
         hasExited = true;
