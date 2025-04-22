@@ -3,7 +3,8 @@
 // Author : Edward Parra-Garcia
 // Creation Date : February 28, 2025
 //
-// Brief Description : This code makes Rue (the player) die if they collide with an enemy or have a Y value of -9.
+// Brief Description : This code allows the player to disappear, stop movement, and die through collision or if Rue 
+                       has a Y value of -9. Additonally has the script to load the current scence when restarted.
 *****************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
@@ -15,29 +16,6 @@ public class RueLife : MonoBehaviour
     private bool isDead = false;
     [SerializeField] private float reloadDelay = 1.5f;
     [SerializeField] private int dyingYValue = -9;
-
-    /// <summary>
-    /// Deletes the palyers mesh, turns off physics, and stops playr movement. (AKA DEATH)
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.transform.tag == "Enemy")
-        {
-            //Debug.Log(collision.gameObject.name);
-            //make player disappear
-            //GetComponent<MeshRenderer>().enabled = false;
-
-            //stop player movement
-           // GetComponent<PlayerController>().enabled = false;
-
-            //turn off physics for the player (gravity)
-            //GetComponent<Rigidbody>().isKinematic = false;
-
-            //DIE
-           // Die();
-        }
-    }
 
     /// <summary>
     /// Makes player die and invokes Reload Scene().

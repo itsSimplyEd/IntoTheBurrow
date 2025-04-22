@@ -39,7 +39,7 @@ public class MovePoints : MonoBehaviour
                 currentIndex = 0;
             }
         }
-
+        //moves the enemy towards the movepoints using given speed and Time.deltaTime
         transform.position = Vector3.MoveTowards(transform.position, movePoints[currentIndex].transform.position,
             speed * Time.deltaTime);
     }
