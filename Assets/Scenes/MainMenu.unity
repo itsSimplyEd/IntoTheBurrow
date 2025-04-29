@@ -1267,7 +1267,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Kill enemies by backstabbig them. (Hittting them in the back)
+  m_text: 'Kill enemies by backstabbing them. (Hittting them in the back)
 
 
     Burrow

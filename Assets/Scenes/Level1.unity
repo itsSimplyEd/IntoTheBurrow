@@ -4271,6 +4271,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600091348}
   m_CullTransparentMesh: 1
+--- !u!1 &603646742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4106989615875698597, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+  m_PrefabInstance: {fileID: 1687139091}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &603646743 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+  m_PrefabInstance: {fileID: 1687139091}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &610033026
 GameObject:
   m_ObjectHideFlags: 0
@@ -9572,6 +9582,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rue: {fileID: 1531527406}
+  burrowModel: {fileID: 603646742}
+  rueRenderer: {fileID: 0}
   playerInput: {fileID: 1531527409}
   burrow:
     m_Name: Burrow
@@ -9610,7 +9622,6 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   playerSpeed: 6
-  rueCollider: {fileID: 1531527411}
   timer: {fileID: 596443525}
   isRueBurrowed: 0
   timerOn: 0
@@ -9703,6 +9714,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1408227024}
+  - {fileID: 603646743}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552440513
@@ -10639,6 +10651,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671981105}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1687139091
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1531527414}
+    m_Modifications:
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.4242425
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725925941404071199, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106989615875698597, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_Name
+      value: BurrowModelParra
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106989615875698597, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5173d9a626f08a44fb9375511fb98441, type: 3}
 --- !u!1 &1703962302
 GameObject:
   m_ObjectHideFlags: 0

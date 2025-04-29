@@ -16,11 +16,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject rue;
+    [SerializeField] private GameObject burrowModel;
+    [SerializeField] private MeshRenderer rueRenderer;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputAction burrow;
     [SerializeField] private InputAction restart;
@@ -148,6 +149,7 @@ public class PlayerController : MonoBehaviour
         //The bool is switched to true
         timer.gameObject.SetActive(true);
         timer.fillAmount = 1f;
+        burrowModel.SetActive(true);
         while (burrowTimer >  0)
         {
             timerOn = true;
@@ -156,6 +158,7 @@ public class PlayerController : MonoBehaviour
             timer.fillAmount = burrowTimer/burrowTimerMax;
             yield return null;
         }
+        gameObject.SetActive(false);
         //the player is reenabled
         GetComponent <PlayerController>().enabled = true;
         //the player's layer is changed to "Default"
