@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Dirt
-    second: {fileID: 2100000, guid: 1c91f458f5ed59943b232f032c5809c0, type: 2}
+    second: {fileID: 2100000, guid: 84b3d7183bf2f1f41b85460a263660ed, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: texture
-    second: {fileID: 2100000, guid: 615196ac86a9c5547849b8641bd5971f, type: 2}
+    second: {fileID: 2100000, guid: 09f024b0856016247b817c2b735ffc57, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

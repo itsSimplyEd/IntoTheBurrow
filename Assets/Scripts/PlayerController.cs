@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject rue;
     [SerializeField] private GameObject burrowModel;
+    [SerializeField] private GameObject cameraPOV;
     [SerializeField] private MeshRenderer rueRenderer;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputAction burrow;
@@ -32,7 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isRueBurrowed;
     [SerializeField] private bool timerOn;
     [SerializeField] private float burrowTimer;
-    [SerializeField] private float burrowTimerMax = 2f;
+    [SerializeField] private float burrowTimerMax = 1f;
+    [SerializeField] private AudioSource burrowSound;
     private Rigidbody rb;
     private Vector3 playerMovement;
     /// <summary>
@@ -91,21 +93,26 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Allows the player to move and gives the dev flexibility to change speed values.
+    /// Allows the player to move and gives the dev flexibility to change speed values. Additionally, moves the camera
+    /// with the player.
     /// </summary>
     /// <param name="iValue"></param>
     private void OnMove(InputValue iValue)
     {
         Vector2 inputMovement = iValue.Get<Vector2>();
-        playerMovement.x = inputMovement.x * playerSpeed;
-        playerMovement.z = inputMovement.y * playerSpeed;
+        float xmove = inputMovement.x;
+        float zmove = inputMovement.y;
+        Vector3 rmove = xmove * cameraPOV.transform.right; 
+        Vector3 fmove = zmove * cameraPOV.transform.forward;
+        playerMovement = rmove + fmove;
+     
     }
     /// <summary>
     /// Moves the player
     /// </summary>
-    void Update()
+    void FixedUpdate()
     {
-        rb.velocity = new Vector3(playerMovement.x, rb.velocity.y, playerMovement.z);
+        rb.velocity = new Vector3(playerMovement.x * playerSpeed, rb.velocity.y, playerMovement.z * playerSpeed);
     }
     /// <summary>
     /// Allows the player to destroy the enemy(parent) if the hitbox is hit.
@@ -123,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     /// <summary>
     /// Turns off physics, turns off movement, and changes the player's layer to "Burrowed." Additonally, starts the 
-    /// coroutine to reenable the player.
+    /// coroutine to reenable the player and plays sound for burrowing.
     /// </summary>
     private void RueBurrows()
     {
@@ -133,6 +140,8 @@ public class PlayerController : MonoBehaviour
         GetComponent<PlayerController>().enabled = false;
         //Changes the player's layer to "Burrowed"
         gameObject.layer = LayerMask.NameToLayer("Burrowed");
+        //Plays sound for burrowedState
+        burrowSound.Play();
         //Reenables Rue's main actions
         StartCoroutine(ReenableRue());
     }
@@ -149,6 +158,9 @@ public class PlayerController : MonoBehaviour
         //The bool is switched to true
         timer.gameObject.SetActive(true);
         timer.fillAmount = 1f;
+        //Disables the palyer's meshRenderer
+        rueRenderer.enabled = false;
+        //Sets the burrowModel to active
         burrowModel.SetActive(true);
         while (burrowTimer >  0)
         {
@@ -158,12 +170,17 @@ public class PlayerController : MonoBehaviour
             timer.fillAmount = burrowTimer/burrowTimerMax;
             yield return null;
         }
-        gameObject.SetActive(false);
+        //Reenables the palyer's meshRenderer
+        rueRenderer.enabled = true;
+        //Sets the burrowModel to inactive 
+        burrowModel.SetActive(false);
         //the player is reenabled
         GetComponent <PlayerController>().enabled = true;
         //the player's layer is changed to "Default"
         //burrowTimer will equal burrowTimerMax
         gameObject.layer = LayerMask.NameToLayer("Default");
+        //Plays sound for burrowedState
+        burrowSound.Play();
         burrowTimer = burrowTimerMax;
         timer.fillAmount = 0;
         //timer image will be set to false

@@ -12,6 +12,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private AudioSource rueBackstab;
+    [SerializeField] private AudioSource enemyAttacks;
     /// <summary>
     /// Deletes the enemy if player (Rue) collides with the collider of the hitbox and gets function Die() from 
     /// RueLife script and will delete the player.
@@ -26,15 +28,18 @@ public class EnemyController : MonoBehaviour
             if (GetComponent<Collider>() == c.thisCollider)
                 isSelf = true;
         }
-        // Asks if collision was with tag "Rue" and if so, destroys self.
+        //Asks if collision was with tag "Rue" and if so, destroys self. Plays sound for being killed and killing the
+        //player.
        if (collision.gameObject.tag == "Rue")
         {
             if (isSelf)
             {
+                enemyAttacks.Play();
                 collision.gameObject.GetComponent<RueLife>().Die();
             }
             else
             {
+                rueBackstab.Play();
                 FindObjectOfType<EnemyManager>().RemoveEnemy(gameObject);
                 Destroy(gameObject);
             }

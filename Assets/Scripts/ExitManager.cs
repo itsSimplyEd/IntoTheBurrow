@@ -7,7 +7,7 @@
                        reload delay. Additionally, activates the exit when EnemyCount is 0 and isExitActive is false.
                        This code also checks if an exit is marked as final exit and will either load the next scene
                        or return the player to the MainMenu. This will activate the meshRenderer and Collider for 
-                       the exit.
+                       the exit. Also plays sound for when a level is completed and when a player enters the exit.
 *****************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
@@ -24,10 +24,12 @@ public class ExitManager : MonoBehaviour
     [SerializeField] private MeshRenderer mR;
     [SerializeField] private Collider exitCollider;
     [SerializeField] private bool isFinal;
+    [SerializeField] private AudioSource victorySound;
+    [SerializeField] private AudioSource burrowSound;
 
     /// <summary>
     /// checks if the enemy count in the array is equal to 0 and if isExitActive is false, if so, gets ActivateExit() 
-    /// and sets isExitAcrice to true
+    /// and sets isExitAcrice to true. Plays victory sound as well.
     /// </summary>
     private void Update()
     {
@@ -49,12 +51,14 @@ public class ExitManager : MonoBehaviour
         {
             if (isFinal == false)
             {
+                burrowSound.Play();
                 Exited();
                 //load the next level
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else
             {
+                burrowSound.Play();
                 //loads the MainMenu
                 FindObjectOfType<GameManager>().FinalExit();
                 FindObjectOfType<PlayerController>().enabled = false;
@@ -63,10 +67,11 @@ public class ExitManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Activates the meshRenderer and the Collider for the exit 
+    /// Activates the meshRenderer and the Collider for the exit. Plays sound when player exits the level.
     /// </summary>
     void ActivateExit()
     {
+        victorySound.Play();
         mR.enabled = true;
         GetComponent<Collider>().enabled = true;
     }
